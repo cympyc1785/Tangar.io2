@@ -49,8 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 4196111434
   ObjectInterest: 0
-  _DestroyWhenStateAuthorityLeaves: 0
-  _AllowStateAuthorityOverride: 1
   Flags: 264449
   NestedObjects: []
   NetworkedBehaviours:
@@ -86,9 +84,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxLifetime: 3
   _speed: 200
-  _asteroidLayer:
+  _playerLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
+  __direction: {x: 0, y: 0, z: 0}
 --- !u!1 &6155234600789756154
 GameObject:
   m_ObjectHideFlags: 0

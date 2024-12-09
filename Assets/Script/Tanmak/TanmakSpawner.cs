@@ -15,8 +15,9 @@ namespace Tangar.io
         [SerializeField] private NetworkPrefabRef _tanmakPrefab = NetworkPrefabRef.Empty;
 
         // The minimum and maximum amount of time between each big asteroid spawn.
-        [SerializeField] private float _minSpawnDelay = 5.0f;
-        [SerializeField] private float _maxSpawnDelay = 10.0f;
+        [SerializeField] private float _minSpawnDelay = 1.0f;
+        [SerializeField] private float _maxSpawnDelay = 2.0f;
+        [SerializeField] private float _maxSpeed = 2000.0f;
 
         // The TickTimer controls the time lapse between spawns.
         private TickTimer _spawnDelay;
@@ -70,7 +71,8 @@ namespace Tangar.io
             // Offset slightly so we are not out of screen at creation time (as it would destroy the asteroid right away)
             position -= position.normalized * 0.1f;
 
-            var tanmak = Runner.Spawn(_tanmakPrefab, position, Quaternion.identity, PlayerRef.None);
+            var tanmak = Runner.Spawn(_tanmakPrefab, position, Quaternion.identity, PlayerRef.None,
+                onBeforeSpawned: FireTanmak);
 
             _tanmaks.Add(tanmak.Id);
 
@@ -83,6 +85,23 @@ namespace Tangar.io
             // Chose a random amount of time until the next spawn.
             var time = Random.Range(_minSpawnDelay, _maxSpawnDelay);
             _spawnDelay = TickTimer.CreateFromSeconds(Runner, time);
+        }
+
+        // Fire Tanmak
+        private void FireTanmak(NetworkRunner runner, NetworkObject tanmakNetworkObject)
+        {
+            Vector3 force = -tanmakNetworkObject.transform.position.normalized * 1000.0f;
+
+            if (force.magnitude > _maxSpeed)
+            {
+                force = force.normalized * _maxSpeed;
+            }
+
+            var rb = tanmakNetworkObject.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+            rb.AddForce(force);
+
+            var tanmakBehaviour = tanmakNetworkObject.GetComponent<TanmakBehaviour>();
         }
 
         // Checks whether any asteroid left the game boundaries. If it has, the asteroid gets despawned.

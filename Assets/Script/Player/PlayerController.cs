@@ -11,6 +11,8 @@ namespace Tangar.io
 {
     public class PlayerController : NetworkBehaviour
     {
+        [SerializeField] private int _points = 5;
+
         // Game Session AGNOSTIC Settings
         [SerializeField] private float _respawnDelay = 4.0f;
         [SerializeField] private float _playerDamageRadius = 2.5f;
@@ -91,7 +93,7 @@ namespace Tangar.io
             // Checks if the player got hit by an tanmak
             if (_isAlive && HasHitTanmak())
             {
-                ShipWasHit();
+                Debug.Log("Got Point");
             }
         }
 
@@ -119,19 +121,28 @@ namespace Tangar.io
 
         // Toggle the _isAlive boolean if the player was hit and check whether the player has any lives left.
         // If they do, then the _respawnTimer is activated.
-        private void ShipWasHit()
+        public void PlayerWasHit(PlayerRef player)
         {
+            // Ignore my bullet
+            if (player == Object.InputAuthority) return;
+
             _isAlive = false;
 
-            ResetShip();
+            ResetPlayer();
 
             if (Object.HasStateAuthority == false) return;
+
+            // Give point for killing
+            if (Runner.TryGetPlayerObject(player, out var playerNetworkObject))
+            {
+                playerNetworkObject.GetComponent<PlayerDataNetworked>().AddToScore(_points);
+            }
 
             _respawnTimer = TickTimer.CreateFromSeconds(Runner, _respawnDelay);
         }
 
         // Resets the players movement velocity
-        private void ResetShip()
+        private void ResetPlayer()
         {
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;

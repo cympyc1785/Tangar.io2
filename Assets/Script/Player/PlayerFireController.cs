@@ -18,6 +18,7 @@ namespace Tangar.io
         // Local Runtime references
         private Rigidbody _rigidbody = null;
         private PlayerController _playerController = null;
+        private PlayerMovementController _playerMovementController = null;
 
         // Game Session SPECIFIC Settings
         [Networked] private NetworkButtons _buttonsPrevious { get; set; }
@@ -29,6 +30,7 @@ namespace Tangar.io
             // Set the local runtime references.
             _rigidbody = GetComponent<Rigidbody>();
             _playerController = GetComponent<PlayerController>();
+            _playerMovementController = GetComponent<PlayerMovementController>();
         }
 
         public override void FixedUpdateNetwork()
@@ -60,7 +62,15 @@ namespace Tangar.io
         {
             if (_shootCooldown.ExpiredOrNotRunning(Runner) == false || !Runner.CanSpawn) return;
 
-            Runner.Spawn(_bullet, _rigidbody.position, _rigidbody.rotation, Object.InputAuthority);
+            var rot = _playerMovementController._lastDirection;
+            var bullet = Runner.Spawn(_bullet, _rigidbody.position,
+                Quaternion.FromToRotation(Vector3.forward, rot), Object.InputAuthority);
+
+            // Set initial direction of bullet
+            if (bullet != null)
+            {
+                bullet.gameObject.GetComponent<BulletBehaviour>()._direction = rot.normalized;
+            }
 
             _shootCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenShots);
         }

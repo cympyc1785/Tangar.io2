@@ -13,6 +13,7 @@ namespace Tangar.io
 
         // The countdown for a bullet lifetime.
         [Networked] private TickTimer _currentLifetime { get; set; }
+        [Networked] public Vector3 _direction { get; set; }
 
         public override void Spawned()
         {
@@ -28,7 +29,7 @@ namespace Tangar.io
             // If the bullet has not hit an asteroid, moves forward.
             if (HasHitPlayer() == false)
             {
-                transform.Translate(transform.forward * _speed * Runner.DeltaTime, Space.World);
+                transform.Translate(_direction * _speed * Runner.DeltaTime, Space.World);
             }
             else
             {
@@ -60,8 +61,7 @@ namespace Tangar.io
             if (playerController._isAlive == false)
                 return false;
 
-            //tanmakBehaviour.HitAsteroid(Object.InputAuthority);
-            // call player hit
+            playerController.PlayerWasHit(Object.InputAuthority);
 
             return true;
         }

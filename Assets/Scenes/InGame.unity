@@ -372,8 +372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tanmakPrefab:
     RawGuidValue: 15f43343ba0a60e47a63d28496373c3f
-  _minSpawnDelay: 5
-  _maxSpawnDelay: 10
+  _minSpawnDelay: 1
+  _maxSpawnDelay: 2
+  _maxSpeed: 2000
 --- !u!114 &374345284
 MonoBehaviour:
   m_ObjectHideFlags: 0

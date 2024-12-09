@@ -11,8 +11,8 @@ namespace Tangar.io
     {
         // Game Session AGNOSTIC Settings
         [SerializeField] private float _rotationSpeed = 90.0f;
-        [SerializeField] private float _movementSpeed = 2000.0f;
-        [SerializeField] private float _maxSpeed = 200.0f;
+        [SerializeField] private float _movementSpeed = 3000.0f;
+        [SerializeField] private float _maxSpeed = 500.0f;
 
         // Local Runtime references
         private Rigidbody
@@ -24,6 +24,8 @@ namespace Tangar.io
         // Game Session SPECIFIC Settings
         [Networked] private float _screenBoundaryX { get; set; }
         [Networked] private float _screenBoundaryY { get; set; }
+
+        [Networked] public Vector3 _lastDirection { get; private set; }
 
         public override void Spawned()
         {
@@ -38,6 +40,8 @@ namespace Tangar.io
 
             _screenBoundaryX = Camera.main.orthographicSize * Camera.main.aspect;
             _screenBoundaryY = Camera.main.orthographicSize;
+
+            _lastDirection = Vector3.forward;
         }
 
         public override void FixedUpdateNetwork()
@@ -59,16 +63,28 @@ namespace Tangar.io
         // Moves the player RB using the input for the client with InputAuthority over the object
         private void Move(PlayerInput input)
         {
-            Quaternion rot = _rigidbody.rotation *
-                             Quaternion.Euler(0, input.HorizontalInput * _rotationSpeed * Runner.DeltaTime, 0);
-            _rigidbody.MoveRotation(rot);
+            //Quaternion rot = _rigidbody.rotation *
+            //                 Quaternion.Euler(0, input.HorizontalInput * _rotationSpeed * Runner.DeltaTime, 0);
+            //_rigidbody.MoveRotation(rot);
 
-            Vector3 force = (rot * Vector3.forward) * input.VerticalInput * _movementSpeed * Runner.DeltaTime;
-            _rigidbody.AddForce(force);
+            //Vector3 force = (rot * Vector3.forward) * input.VerticalInput * _movementSpeed * Runner.DeltaTime;
+            //_rigidbody.AddForce(force);
+
+            // Calculate direction
+            Vector3 direction = (transform.forward * input.VerticalInput + transform.right * input.HorizontalInput);
+            direction.Normalize();
+
+            // Apply direct translation
+            _rigidbody.velocity = direction * _movementSpeed * Runner.DeltaTime;
 
             if (_rigidbody.velocity.magnitude > _maxSpeed)
             {
                 _rigidbody.velocity = _rigidbody.velocity.normalized * _maxSpeed;
+            }
+
+            if (input.VerticalInput != 0 || input.HorizontalInput != 0)
+            {
+                _lastDirection = direction;
             }
         }
 

@@ -10,13 +10,8 @@ namespace Tangar.io
     {
         [SerializeField] private int _points = 1;
 
-        // The IsBig variable is Networked as it can be used to evaluate and derive visual information for an asteroid locally.
-        [HideInInspector] [Networked] public NetworkBool IsBig { get; set; }
-
         // Used to delay the despawn after the hit and play the destruction animation.
         [Networked] private NetworkBool _wasHit { get; set; }
-
-        [Networked] private TickTimer _despawnTimer { get; set; }
 
         private NetworkRigidbody3D _networkRigidbody;
 
@@ -25,7 +20,7 @@ namespace Tangar.io
         public override void Spawned()
         {
             _networkRigidbody = GetComponent<NetworkRigidbody3D>();
-            _networkRigidbody.InterpolationTarget.localScale = Vector3.one;
+            //_networkRigidbody.InterpolationTarget.localScale = Vector3.one;
         }
 
         // When hit by another object, this method is called to decide what to do next.
@@ -44,16 +39,7 @@ namespace Tangar.io
             }
 
             _wasHit = true;
-            // _despawnTimer = TickTimer.CreateFromSeconds(Runner, .2f);
             Runner.Despawn(Object);
-        }
-
-        public override void Render()
-        {
-            if (_wasHit && _despawnTimer.IsRunning)
-            {
-                _networkRigidbody.InterpolationTarget.localScale *= .95f;
-            }
         }
     }
 }
