@@ -93,7 +93,8 @@ namespace Tangar.io
             // Checks if the player got hit by an tanmak
             if (_isAlive && HasHitTanmak())
             {
-                Debug.Log("Got Point");
+                // Point Added
+                // Grow
             }
         }
 
@@ -114,7 +115,7 @@ namespace Tangar.io
             if (tanmakBehaviour.IsAlive == false)
                 return false;
 
-            tanmakBehaviour.HitPlayer(PlayerRef.None);
+            tanmakBehaviour.HitPlayer(Object.InputAuthority);
 
             return true;
         }

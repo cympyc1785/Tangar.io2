@@ -20,7 +20,6 @@ namespace Tangar.io
 
         private Dictionary<PlayerRef, string> _playerNickNames = new Dictionary<PlayerRef, string>();
         private Dictionary<PlayerRef, int> _playerScores = new Dictionary<PlayerRef, int>();
-        private Dictionary<PlayerRef, int> _playerLives = new Dictionary<PlayerRef, int>();
 
         // Creates a new Overview Entry
         public void AddEntry(PlayerRef playerRef, PlayerDataNetworked playerDataNetworked)
@@ -33,12 +32,10 @@ namespace Tangar.io
             entry.color = PlayerVisualController.GetColor(playerRef.PlayerId);
 
             string nickName = String.Empty;
-            int lives = 0;
             int score = 0;
 
             _playerNickNames.Add(playerRef, nickName);
             _playerScores.Add(playerRef, score);
-            _playerLives.Add(playerRef, lives);
 
             _playerListEntries.Add(playerRef, entry);
 
@@ -57,17 +54,8 @@ namespace Tangar.io
 
             _playerNickNames.Remove(playerRef);
             _playerScores.Remove(playerRef);
-            _playerLives.Remove(playerRef);
 
             _playerListEntries.Remove(playerRef);
-        }
-
-        public void UpdateLives(PlayerRef player, int lives)
-        {
-            if (_playerListEntries.TryGetValue(player, out var entry) == false) return;
-
-            _playerLives[player] = lives;
-            UpdateEntry(player, entry);
         }
 
         public void UpdateScore(PlayerRef player, int score)
@@ -90,9 +78,8 @@ namespace Tangar.io
         {
             var nickName = _playerNickNames[player];
             var score = _playerScores[player];
-            var lives = _playerLives[player];
 
-            entry.text = $"{nickName}\nScore: {score}\nLives: {lives}";
+            entry.text = $"{nickName}\nScore: {score}";
         }
     }
 }
