@@ -4907,8 +4907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 3583807864
   ObjectInterest: 0
-  _DestroyWhenStateAuthorityLeaves: 0
-  _AllowStateAuthorityOverride: 1
   Flags: 264449
   NestedObjects: []
   NetworkedBehaviours:
@@ -4933,7 +4931,6 @@ MonoBehaviour:
     _length: 0
     _data:
       Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  _Lives: 0
   _Score: 0
 --- !u!114 &4161315759114475690
 MonoBehaviour:
@@ -4948,10 +4945,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _respawnDelay: 2
-  _spaceshipDamageRadius: 2.5
-  _asteroidCollisionLayer:
+  _playerDamageRadius: 2.5
+  _tanmakCollisionLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  __isAlive:
+    _value: 0
 --- !u!114 &5458788572214893125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4964,7 +4963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19e16dd62ab7ed42a2805f6d23c4957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spaceshipModel: {fileID: 4415477982431459216}
+  _playerModel: {fileID: 2300000, guid: 65e16ec6a1570944a980e4988e715ae6, type: 3}
   _destructionVFX: {fileID: 19801310}
   _engineTrailVFX: {fileID: 19832664}
 --- !u!114 &8813624284770857263
