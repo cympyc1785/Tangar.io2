@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5401312416496968995}
   - component: {fileID: 7177059667834109445}
   m_Layer: 6
-  m_Name: BigAsteroid
+  m_Name: Tanmak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
