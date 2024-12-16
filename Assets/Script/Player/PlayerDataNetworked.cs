@@ -87,6 +87,11 @@ namespace Tangar.io
             Score += points;
         }
 
+        public void ResetScore()
+        {
+            Score = 0;
+        }
+
         // RPC used to send player information to the Host
         [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
         private void RpcSetNickName(string nickName)

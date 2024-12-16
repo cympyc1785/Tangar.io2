@@ -15,12 +15,14 @@ namespace Tangar.io
 
         // Game Session AGNOSTIC Settings
         [SerializeField] private float _respawnDelay = 4.0f;
-        [SerializeField] private float _playerDamageRadius = 2.5f;
+        [SerializeField] private float _playerDamageRadius = 5.0f;
         [SerializeField] private LayerMask _tanmakCollisionLayer;
+        [SerializeField] private GameObject _model;
 
         // Local Runtime references
         private ChangeDetector _changeDetector;
         private Rigidbody _rigidbody = null;
+        private SphereCollider _sphereCollider = null;
         private PlayerDataNetworked _playerDataNetworked = null;
         private PlayerVisualController _visualController = null;
 
@@ -33,11 +35,19 @@ namespace Tangar.io
 
         [Networked] private TickTimer _respawnTimer { get; set; }
 
+        [Networked] private Vector3 _networkScale { get; set; }
+
+        private float _minScale = 5.0f;
+        private float _maxScale = 20.0f;
+
+        public float _scaleFactor = 2.0f;
+
         public override void Spawned()
         {
             // --- Host & Client
             // Set the local runtime references.
             _rigidbody = GetComponent<Rigidbody>();
+            _sphereCollider = GetComponent<SphereCollider>();
             _playerDataNetworked = GetComponent<PlayerDataNetworked>();
             _visualController = GetComponent<PlayerVisualController>();
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
@@ -62,6 +72,11 @@ namespace Tangar.io
                         var reader = GetPropertyReader<NetworkBool>(nameof(_isAlive));
                         var (previous, current) = reader.Read(previousBuffer, currentBuffer);
                         ToggleVisuals(previous, current);
+                        break;
+                    case nameof(_networkScale):
+                        _model.transform.localScale = _networkScale;
+                        _sphereCollider.radius = _networkScale.x / 2.0f;
+                        _playerDamageRadius = _networkScale.x / 2.0f;
                         break;
                 }
             }
@@ -95,6 +110,7 @@ namespace Tangar.io
             {
                 // Point Added
                 // Grow
+                UpdateSize();
             }
         }
 
@@ -147,6 +163,17 @@ namespace Tangar.io
         {
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
+
+            _playerDataNetworked.ResetScore();
+            _networkScale = new Vector3(_minScale, 1, _minScale);
+        }
+
+        private void UpdateSize()
+        {
+            float scale = Mathf.Clamp(_minScale + _playerDataNetworked.Score * _scaleFactor, _minScale, _maxScale);
+            int score = _playerDataNetworked.Score;
+            Debug.Log(score);
+            _networkScale = new Vector3(scale, 1, scale);
         }
     }
 }

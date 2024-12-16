@@ -4943,13 +4943,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f0f636268178a47be36492b7923f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _points: 5
   _respawnDelay: 2
-  _playerDamageRadius: 2.5
+  _playerDamageRadius: 5
   _tanmakCollisionLayer:
     serializedVersion: 2
     m_Bits: 64
+  _model: {fileID: 5631020575753157889}
   __isAlive:
     _value: 0
+  _scaleFactor: 2
 --- !u!114 &5458788572214893125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4977,7 +4980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742e4d31f7c762241b073fc4eed79db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 90
   _movementSpeed: 3000
   _maxSpeed: 500
   __lastDirection: {x: 0, y: 0, z: 0}
