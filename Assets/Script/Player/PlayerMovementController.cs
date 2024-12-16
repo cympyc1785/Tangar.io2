@@ -10,7 +10,7 @@ namespace Tangar.io
     public class PlayerMovementController : NetworkBehaviour
     {
         // Game Session AGNOSTIC Settings
-        [SerializeField] private float _rotationSpeed = 90.0f;
+        // [SerializeField] private float _rotationSpeed = 90.0f;
         [SerializeField] private float _movementSpeed = 3000.0f;
         [SerializeField] private float _maxSpeed = 500.0f;
 

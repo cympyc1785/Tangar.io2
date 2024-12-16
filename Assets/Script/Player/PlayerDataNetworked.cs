@@ -10,6 +10,7 @@ namespace Tangar.io
     {
         // Local Runtime references
         private PlayerOverviewPanel _overviewPanel = null;
+        private GameScorePanel _scorePanel = null;
 
         private ChangeDetector _changeDetector;
 
@@ -43,9 +44,12 @@ namespace Tangar.io
             // --- Host & Client
             // Set the local runtime references.
             _overviewPanel = FindObjectOfType<PlayerOverviewPanel>();
+            _scorePanel = FindObjectOfType<GameScorePanel>();
+
             // Add an entry to the local Overview panel with the information of this spaceship
             _overviewPanel.AddEntry(Object.InputAuthority, this);
-            
+            _scorePanel.AddEntry(Object.InputAuthority, this);
+
             // Refresh panel visuals in Spawned to set to initial values.
             _overviewPanel.UpdateNickName(Object.InputAuthority, NickName.ToString());
             _overviewPanel.UpdateScore(Object.InputAuthority, Score);
@@ -64,6 +68,7 @@ namespace Tangar.io
                         break;
                     case nameof(Score):
                         _overviewPanel.UpdateScore(Object.InputAuthority, Score);
+                        _scorePanel.UpdateRankInfo(Object.InputAuthority, this);
                         break;
                 }
             }
@@ -73,6 +78,7 @@ namespace Tangar.io
         public override void Despawned(NetworkRunner runner, bool hasState)
         {
             _overviewPanel.RemoveEntry(Object.InputAuthority);
+            _scorePanel.RemoveEntry(Object.InputAuthority);
         }
 
         // Increase the score by X amount of points
