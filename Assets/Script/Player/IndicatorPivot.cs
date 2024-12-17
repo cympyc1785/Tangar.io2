@@ -7,7 +7,7 @@ namespace Tangar.io
     {
         private Rigidbody _playerRigidbody;
 
-        [SerializeField] private float rotationSmoothing = 10f;
+        [SerializeField] private float rotationSmoothing = 100f;
         [SerializeField] private float movementThreshold = 0.1f; 
 
         private Vector3 _lastDirection = Vector3.forward; 
