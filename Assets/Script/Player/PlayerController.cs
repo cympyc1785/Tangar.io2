@@ -18,6 +18,9 @@ namespace Tangar.io
         [SerializeField] private float _playerDamageRadius = 5.0f;
         [SerializeField] private LayerMask _tanmakCollisionLayer;
         [SerializeField] private GameObject _model;
+        [SerializeField] private GameObject _firingIndicator;
+        [SerializeField] private float _indicatorOffset = 7.0f;
+
 
         // Local Runtime references
         private ChangeDetector _changeDetector;
@@ -44,6 +47,7 @@ namespace Tangar.io
         private float _maxScale = 20.0f;
 
         public float _scaleFactor = 2.0f;
+        private Vector3 _lastMovementDirection = Vector3.forward;
 
         public override void Spawned()
         {
@@ -64,7 +68,7 @@ namespace Tangar.io
             if (Object.HasStateAuthority == false) return;
             _isAlive = true;
 
-            
+            UpdateIndicator();
         }
 
         public override void Render()
@@ -84,6 +88,7 @@ namespace Tangar.io
                         _playerDamageRadius = _networkScale.x / 2.0f;
                         _hitBoxRoot.BroadRadius = _networkScale.x / 2.0f;
                         _hitBox.SphereRadius = _networkScale.x / 2.0f;
+                        _indicatorOffset = _networkScale.x / 1.6f;
                         break;
                 }
             }
@@ -119,6 +124,7 @@ namespace Tangar.io
                 // Grow
                 UpdateSize();
             }
+            UpdateIndicator();
         }
 
         // Check tanmak collision using a lag compensated OverlapSphere
@@ -182,5 +188,25 @@ namespace Tangar.io
             Debug.Log(score);
             _networkScale = new Vector3(scale, 1, scale);
         }
+        private void UpdateIndicator()
+        {
+            if (_firingIndicator == null) return;
+
+            // Get the current movement direction
+            Vector3 movementDirection = _rigidbody.velocity.normalized;
+
+            // If the player is moving, update the last valid movement direction
+            if (movementDirection != Vector3.zero)
+            {
+                _lastMovementDirection = movementDirection;
+            }
+
+            // Adjust the indicator's position based on the last movement direction
+            _firingIndicator.transform.position = transform.position + _lastMovementDirection * _indicatorOffset;
+
+            // Update the indicator's rotation to point in the last movement direction
+            _firingIndicator.transform.rotation = Quaternion.LookRotation(_lastMovementDirection, Vector3.up);
+        }
+
     }
 }
