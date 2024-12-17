@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 374345281}
   - component: {fileID: 374345283}
   - component: {fileID: 374345284}
+  - component: {fileID: 374345285}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -343,6 +344,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 374345283}
   - {fileID: 374345284}
+  - {fileID: 374345285}
 --- !u!4 &374345282
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +391,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerNetworkPrefab:
     RawGuidValue: 775dd0a15ad25a544b33ad40ef0da1f0
+--- !u!114 &374345285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374345279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721fafc82727db84da527d8eef3286ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fieldItemPrefab:
+    RawGuidValue: 31d56b72415a5844ba8ddfcdd5b21b1c
+  _itemPrefabs:
+  - RawGuidValue: 5d3b7331d76ede145884abe8646e2d2f
+  _minSpawnDelay: 1
+  _maxSpawnDelay: 2
+  _maxSpawnCount: 10
 --- !u!1 &400970632
 GameObject:
   m_ObjectHideFlags: 0

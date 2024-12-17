@@ -4840,6 +4840,7 @@ GameObject:
   - component: {fileID: 8813624284770857263}
   - component: {fileID: 5995520130485653928}
   - component: {fileID: 3413019040037438842}
+  - component: {fileID: 5788736074415650863}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -4914,6 +4915,7 @@ MonoBehaviour:
   - {fileID: 8813624284770857263}
   - {fileID: 5995520130485653928}
   - {fileID: 3413019040037438842}
+  - {fileID: 5788736074415650863}
 --- !u!114 &3318268825766571343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4949,6 +4951,9 @@ MonoBehaviour:
   _tanmakCollisionLayer:
     serializedVersion: 2
     m_Bits: 64
+  _itemCollisionLayer:
+    serializedVersion: 2
+    m_Bits: 512
   _model: {fileID: 5631020575753157889}
   __isAlive:
     _value: 0
@@ -5020,6 +5025,18 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
+--- !u!114 &5788736074415650863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013fe486a5e08fc4ebdc9da64cd7d09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &185348
 GameObject:
   m_ObjectHideFlags: 0

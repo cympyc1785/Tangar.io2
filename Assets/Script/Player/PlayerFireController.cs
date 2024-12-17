@@ -19,6 +19,7 @@ namespace Tangar.io
         private Rigidbody _rigidbody = null;
         private PlayerController _playerController = null;
         private PlayerMovementController _playerMovementController = null;
+        private Inventory _inventory = null;
 
         // Game Session SPECIFIC Settings
         [Networked] private NetworkButtons _buttonsPrevious { get; set; }
@@ -31,6 +32,7 @@ namespace Tangar.io
             _rigidbody = GetComponent<Rigidbody>();
             _playerController = GetComponent<PlayerController>();
             _playerMovementController = GetComponent<PlayerMovementController>();
+            _inventory = GetComponent<Inventory>();
         }
 
         public override void FixedUpdateNetwork()
@@ -52,6 +54,11 @@ namespace Tangar.io
             if (input.Buttons.WasPressed(_buttonsPrevious, PlayerButtons.Fire))
             {
                 SpawnBullet();
+            }
+
+            else if (input.Buttons.WasPressed(_buttonsPrevious, PlayerButtons.UseItem))
+            {
+                _inventory.UseItem();
             }
 
             _buttonsPrevious = input.Buttons;

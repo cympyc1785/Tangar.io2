@@ -17,7 +17,9 @@ namespace Tangar.io
         [SerializeField] private float _respawnDelay = 4.0f;
         [SerializeField] private float _playerDamageRadius = 5.0f;
         [SerializeField] private LayerMask _tanmakCollisionLayer;
+        [SerializeField] private LayerMask _itemCollisionLayer;
         [SerializeField] private GameObject _model;
+        
 
         // Local Runtime references
         private ChangeDetector _changeDetector;
@@ -25,6 +27,7 @@ namespace Tangar.io
         private SphereCollider _sphereCollider = null;
         private PlayerDataNetworked _playerDataNetworked = null;
         private PlayerVisualController _visualController = null;
+        private Inventory _inventory = null;
 
         private List<LagCompensatedHit> _lagCompensatedHits = new List<LagCompensatedHit>();
 
@@ -32,15 +35,12 @@ namespace Tangar.io
         public bool AcceptInput => _isAlive && Object.IsValid;
 
         [Networked] public NetworkBool _isAlive { get; private set; }
-
         [Networked] private TickTimer _respawnTimer { get; set; }
-
         [Networked] private Vector3 _networkScale { get; set; }
 
         private float _minScale = 5.0f;
         private float _maxScale = 20.0f;
-
-        public float _scaleFactor = 2.0f;
+        [SerializeField] private float _scaleFactor = 2.0f;
 
         public override void Spawned()
         {
@@ -51,6 +51,7 @@ namespace Tangar.io
             _playerDataNetworked = GetComponent<PlayerDataNetworked>();
             _visualController = GetComponent<PlayerVisualController>();
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+            _inventory = GetComponent<Inventory>();
 
             _visualController.SetColorFromPlayerID(Object.InputAuthority.PlayerId);
 
@@ -112,6 +113,11 @@ namespace Tangar.io
                 // Grow
                 UpdateSize();
             }
+
+            if (_isAlive && HasHitItem())
+            {
+                // item get effect?
+            }
         }
 
         // Check tanmak collision using a lag compensated OverlapSphere
@@ -132,6 +138,29 @@ namespace Tangar.io
                 return false;
 
             tanmakBehaviour.HitPlayer(Object.InputAuthority);
+
+            return true;
+        }
+
+        private bool HasHitItem()
+        {
+            _lagCompensatedHits.Clear();
+
+            var count = Runner.LagCompensation.OverlapSphere(_rigidbody.position, _playerDamageRadius,
+                Object.InputAuthority, _lagCompensatedHits,
+                _itemCollisionLayer.value);
+
+            if (count <= 0) return false;
+
+            _lagCompensatedHits.SortDistance();
+
+            var fieldItem = _lagCompensatedHits[0].GameObject.GetComponent<FieldItem>();
+            if (fieldItem.IsAlive == false)
+                return false;
+
+            _inventory.AddItem(fieldItem.ItemPrefab);
+
+            fieldItem.GotItem(Object.InputAuthority);
 
             return true;
         }

@@ -12,6 +12,7 @@ namespace Tangar.io
         private const string AXIS_HORIZONTAL = "Horizontal";
         private const string AXIS_VERTICAL = "Vertical";
         private const string BUTTON_FIRE1 = "Fire1";
+        private const string BUTTON_USE_ITEM = "Fire2"; // Firing Item temporarily set as Fire2
         private const string BUTTON_JUMP = "Jump"; // Can be used as an alternative fire button to shoot with SPACE
 
         // The INetworkRunnerCallbacks of this LocalInputPoller are automatically detected
@@ -25,6 +26,7 @@ namespace Tangar.io
             localInput.HorizontalInput = Input.GetAxis(AXIS_HORIZONTAL);
             localInput.VerticalInput = Input.GetAxis(AXIS_VERTICAL);
             localInput.Buttons.Set(PlayerButtons.Fire, Input.GetButton(BUTTON_FIRE1));
+            localInput.Buttons.Set(PlayerButtons.UseItem, Input.GetButton(BUTTON_USE_ITEM));
 
             input.Set(localInput);
         }

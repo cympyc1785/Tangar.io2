@@ -9,6 +9,7 @@ namespace Tangar.io
     enum PlayerButtons
     {
         Fire = 0,
+        UseItem = 1,
     }
 
     public struct PlayerInput : INetworkInput

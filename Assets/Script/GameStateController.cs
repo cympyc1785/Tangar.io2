@@ -98,6 +98,7 @@ namespace Tangar.io
             // Starts spawners once the game start delay has expired
             FindObjectOfType<PlayerSpawner>().StartPlayerSpawner(this);
             FindObjectOfType<TanmakSpawner>().StartTanmakSpawner();
+            FindObjectOfType<ItemSpawner>().StartItemSpawner();
 
             // Switches to the Running GameState and sets the time to the length of a game session
             _gameState = GameState.Running;
