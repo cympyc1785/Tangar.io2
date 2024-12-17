@@ -23,16 +23,19 @@ namespace Tangar.io
         private ChangeDetector _changeDetector;
         private Rigidbody _rigidbody = null;
         private SphereCollider _sphereCollider = null;
+        private HitboxRoot _hitBoxRoot = null;
+        private Hitbox _hitBox = null;
         private PlayerDataNetworked _playerDataNetworked = null;
         private PlayerVisualController _visualController = null;
 
         private List<LagCompensatedHit> _lagCompensatedHits = new List<LagCompensatedHit>();
 
+        
+
         // Game Session SPECIFIC Settings
         public bool AcceptInput => _isAlive && Object.IsValid;
 
         [Networked] public NetworkBool _isAlive { get; private set; }
-
         [Networked] private TickTimer _respawnTimer { get; set; }
 
         [Networked] private Vector3 _networkScale { get; set; }
@@ -50,6 +53,8 @@ namespace Tangar.io
             _sphereCollider = GetComponent<SphereCollider>();
             _playerDataNetworked = GetComponent<PlayerDataNetworked>();
             _visualController = GetComponent<PlayerVisualController>();
+            _hitBoxRoot = GetComponent<HitboxRoot>();
+            _hitBox = GetComponent<Hitbox>();
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
             _visualController.SetColorFromPlayerID(Object.InputAuthority.PlayerId);
@@ -77,6 +82,8 @@ namespace Tangar.io
                         _model.transform.localScale = _networkScale;
                         _sphereCollider.radius = _networkScale.x / 2.0f;
                         _playerDamageRadius = _networkScale.x / 2.0f;
+                        _hitBoxRoot.BroadRadius = _networkScale.x / 2.0f;
+                        _hitBox.SphereRadius = _networkScale.x / 2.0f;
                         break;
                 }
             }

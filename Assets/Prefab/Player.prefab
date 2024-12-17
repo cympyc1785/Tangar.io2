@@ -4840,6 +4840,8 @@ GameObject:
   - component: {fileID: 8813624284770857263}
   - component: {fileID: 5995520130485653928}
   - component: {fileID: 3413019040037438842}
+  - component: {fileID: 19229996029053401}
+  - component: {fileID: 3407535697623440074}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -4914,6 +4916,7 @@ MonoBehaviour:
   - {fileID: 8813624284770857263}
   - {fileID: 5995520130485653928}
   - {fileID: 3413019040037438842}
+  - {fileID: 19229996029053401}
 --- !u!114 &3318268825766571343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5020,6 +5023,44 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
+--- !u!114 &19229996029053401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1039544458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Config: 3
+  BroadRadius: 5
+  Offset: {x: 0, y: 0, z: 0}
+  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Hitboxes:
+  - {fileID: 3407535697623440074}
+--- !u!114 &3407535697623440074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1014831617, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 2
+  SphereRadius: 5
+  CapsuleRadius: 0
+  BoxExtents: {x: 0, y: 0, z: 0}
+  CapsuleExtents: 0
+  Offset: {x: 0, y: 0, z: 0}
+  Root: {fileID: 19229996029053401}
+  GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &185348
 GameObject:
   m_ObjectHideFlags: 0
