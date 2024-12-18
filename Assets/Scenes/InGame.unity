@@ -480,14 +480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721fafc82727db84da527d8eef3286ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fieldItemPrefab:
-    RawGuidValue: 31d56b72415a5844ba8ddfcdd5b21b1c
-  _itemPrefabs:
-  - RawGuidValue: 2c82ec10d67327f4cbfc923944c3f359
-  - RawGuidValue: e877d65a57188d2438baff764827d3b5
-  _itemSprites:
-  - {fileID: 21300000, guid: c5ecf609b0db1104ab59e76d178fdf2d, type: 3}
-  - {fileID: 21300000, guid: b02ff7b9879527b42a0b8c68c2cf7ce9, type: 3}
+  _fieldItemPrefabs:
+  - RawGuidValue: 31d56b72415a5844ba8ddfcdd5b21b1c
+  - RawGuidValue: 1baa0fcbab1d31a438332badcb7b41c8
   _minSpawnDelay: 1
   _maxSpawnDelay: 2
   _maxSpawnCount: 10
@@ -840,7 +835,7 @@ RectTransform:
   m_Children:
   - {fileID: 149568129}
   m_Father: {fileID: 967459721}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1433,7 +1428,7 @@ RectTransform:
   m_Children:
   - {fileID: 1615698767}
   m_Father: {fileID: 967459721}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1555,7 +1550,7 @@ RectTransform:
   m_Children:
   - {fileID: 1448739346}
   m_Father: {fileID: 967459721}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -64,6 +64,8 @@ namespace Tangar.io
 
             _visualController.SetColorFromPlayerID(Object.InputAuthority.PlayerId);
 
+            _inventory.StartInventory();
+
             // --- Host
             // The Game Session SPECIFIC settings are initialized
             if (Object.HasStateAuthority == false) return;
@@ -119,6 +121,8 @@ namespace Tangar.io
                 _isAlive = true;
                 _respawnTimer = default;
             }
+
+            if (!Object.HasStateAuthority) return;
 
             // Checks if the player got hit by an tanmak
             if (_isAlive && HasHitTanmak())

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1137282737821971907}
   - component: {fileID: 1137282737821971906}
+  - component: {fileID: -1086482500674399250}
   - component: {fileID: 1137282737821971909}
   m_Layer: 0
   m_Name: BarrierItem
@@ -50,7 +51,24 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: -1086482500674399250}
   - {fileID: 1137282737821971909}
+--- !u!114 &-1086482500674399250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137282737821971908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!114 &1137282737821971909
 MonoBehaviour:
   m_ObjectHideFlags: 0

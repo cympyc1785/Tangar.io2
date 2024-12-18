@@ -10,9 +10,7 @@ namespace Tangar.io
     // Therefore all of its parameters can remained local and not networked.
     public class ItemSpawner : NetworkBehaviour
     {
-        [SerializeField] private NetworkPrefabRef _fieldItemPrefab = NetworkPrefabRef.Empty;
-        [SerializeField] private List<NetworkPrefabRef> _itemPrefabs = new List<NetworkPrefabRef>();
-        [SerializeField] private List<Sprite> _itemSprites = new List<Sprite>();
+        [SerializeField] private List<NetworkPrefabRef> _fieldItemPrefabs = new List<NetworkPrefabRef>();
 
         [SerializeField] private float _minSpawnDelay = 1.0f;
         [SerializeField] private float _maxSpawnDelay = 2.0f;
@@ -62,19 +60,11 @@ namespace Tangar.io
                 0,
                 Random.Range(-_screenBoundaryY, _screenBoundaryY));
 
-            int randItemIdx = Random.Range(0, _itemPrefabs.Count);
+            int randItemIdx = Random.Range(0, _fieldItemPrefabs.Count);
 
-            var fieldItemObject = Runner.Spawn(_fieldItemPrefab, randPos);
+            var fieldItemObject = Runner.Spawn(_fieldItemPrefabs[randItemIdx], randPos);
 
             fieldItemObject.transform.SetParent(transform);
-
-            fieldItemObject.GetComponent<SpriteRenderer>().sprite = _itemSprites[randItemIdx];
-
-            if (fieldItemObject.TryGetComponent<FieldItem>(out var fieldItem))
-            {
-                // Set random item prefab
-                fieldItem.ItemPrefab = _itemPrefabs[randItemIdx];
-            }
 
             // Register for counting
             _fieldItemIds.Add(fieldItemObject);

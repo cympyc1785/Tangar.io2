@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8086011308045864860}
   - component: {fileID: -8375372337415939356}
   m_Layer: 9
-  m_Name: DummyFieldItem
+  m_Name: BarrierFieldItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefab:
-    RawGuidValue: 00000000000000000000000000000000
+    RawGuidValue: 2c82ec10d67327f4cbfc923944c3f359
 --- !u!114 &-8375372337415939356
 MonoBehaviour:
   m_ObjectHideFlags: 0

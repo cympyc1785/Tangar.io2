@@ -13,6 +13,12 @@ namespace Tangar.io
         public Image _itemImage = null;
         public string inventoryChildName = "Inventory";
 
+        private ChangeDetector _changeDetector;
+
+        [Networked]
+        [OnChangedRender(nameof(DisplayInventory))]
+        private NetworkObject _itemObject {  get; set; }
+
         private Image GetItemImage()
         {
             if (_itemImage == null)
@@ -23,24 +29,25 @@ namespace Tangar.io
             return _itemImage;
         }
 
+        public void StartInventory()
+        {
+            _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        }
+
         public void AddItem(NetworkPrefabRef itemPrefab)
         {
-            if (!Object.HasStateAuthority) return;
-
             if (itemPrefab != null && _inventory.Count < 1)
             {
-                var itemObject = Runner.Spawn(itemPrefab);
+                _itemObject = Runner.Spawn(itemPrefab);
                 Transform inventoryTransform = transform.Find(inventoryChildName);
-                Debug.Log(inventoryTransform.gameObject);
-                itemObject.transform.SetParent(inventoryTransform);
+
+                _itemObject.transform.SetParent(inventoryTransform);
                 
-                if (itemObject.TryGetComponent<Item>(out var item))
+                if (_itemObject.TryGetComponent<Item>(out var item))
                 {
                     item.StartItem();
 
                     _inventory.Add(item);
-
-                    GetItemImage().sprite = item.ItemIcon;
 
                     Debug.Log($"{item.ItemName} is added to inventory. Inventory Count : {_inventory.Count}");
                 }
@@ -57,6 +64,7 @@ namespace Tangar.io
                     Debug.Log($"{_inventory[0].ItemName} is used.");
                     GetItemImage().sprite = null;
                     _inventory.RemoveAt(0);
+                    _itemObject = null;
                 }
                 else
                 {
@@ -75,9 +83,15 @@ namespace Tangar.io
 
         public void DisplayInventory()
         {
-            foreach (var item in _inventory)
+            if (!GetComponent<NetworkObject>().HasInputAuthority) return;
+
+            if (_itemObject != null)
             {
-                Debug.Log($"Item: {item.ItemName}");
+                GetItemImage().sprite = _itemObject.GetComponent<Item>().ItemIcon;
+            }
+            else
+            {
+                GetItemImage().sprite = null;
             }
         }
     }

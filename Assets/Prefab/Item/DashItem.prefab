@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7037496647483100798}
   - component: {fileID: 1021355063010400528}
+  - component: {fileID: -1787684719334643412}
   - component: {fileID: 5997156052118360221}
   m_Layer: 0
   m_Name: DashItem
@@ -50,7 +51,24 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: -1787684719334643412}
   - {fileID: 5997156052118360221}
+--- !u!114 &-1787684719334643412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042735026949802335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!114 &5997156052118360221
 MonoBehaviour:
   m_ObjectHideFlags: 0

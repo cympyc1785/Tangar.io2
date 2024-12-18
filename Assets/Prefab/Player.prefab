@@ -4914,6 +4914,7 @@ MonoBehaviour:
   Flags: 264449
   NestedObjects:
   - {fileID: 1951985996956367264}
+  - {fileID: 1350215609759338397}
   NetworkedBehaviours:
   - {fileID: 3318268825766571343}
   - {fileID: 4161315759114475690}
@@ -4923,7 +4924,6 @@ MonoBehaviour:
   - {fileID: 5788736074415650863}
   - {fileID: -599573434724285438}
   - {fileID: 4542320218131330524}
-  - {fileID: 6320284965286083449}
 --- !u!114 &3318268825766571343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5095,6 +5095,7 @@ MonoBehaviour:
   PlayerController: {fileID: 4161315759114475690}
   _inventory: []
   _itemImage: {fileID: 0}
+  inventoryChildName: Inventory
 --- !u!114 &4542320218131330524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10105,6 +10106,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8848921840128758014}
+  - component: {fileID: 1350215609759338397}
+  - component: {fileID: 5617432229952162166}
   - component: {fileID: 6320284965286083449}
   m_Layer: 7
   m_Name: Inventory
@@ -10128,6 +10131,41 @@ Transform:
   m_Father: {fileID: 498316}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1350215609759338397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296465264317070400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1523564318
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 5617432229952162166}
+  - {fileID: 6320284965286083449}
+--- !u!114 &5617432229952162166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296465264317070400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!114 &6320284965286083449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10143,6 +10181,7 @@ MonoBehaviour:
   PlayerController: {fileID: 4161315759114475690}
   _inventory: []
   _itemImage: {fileID: 0}
+  inventoryChildName: Inventory
 --- !u!1 &5631020575753157889
 GameObject:
   m_ObjectHideFlags: 0
