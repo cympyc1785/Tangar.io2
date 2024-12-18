@@ -67,8 +67,10 @@ namespace Tangar.io
             // Offset slightly so we are not out of screen at creation time (as it would destroy the asteroid right away)
             position -= position.normalized * 0.1f;
 
-            var tanmak = Runner.Spawn(_tanmakPrefab, position, Quaternion.identity, PlayerRef.None,
+            var tanmak = Runner.Spawn(_tanmakPrefab, position,
                 onBeforeSpawned: FireTanmak);
+
+            tanmak.transform.rotation = Quaternion.Euler(90, 0, 0);
 
             tanmak.transform.SetParent(transform);
 
