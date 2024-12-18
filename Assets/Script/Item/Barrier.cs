@@ -14,9 +14,9 @@ namespace Tangar.io
 
         [Networked] private TickTimer _barrierTimer { get; set; }
 
-        public void Start()
+        public override void StartItem()
         {
-            _inventory = transform.parent.GetComponent<Inventory>();
+            _inventory = transform.GetComponentInParent<Inventory>();
             _playerController = _inventory.PlayerController;
         }
 

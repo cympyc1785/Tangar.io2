@@ -8,7 +8,7 @@ namespace Tangar.io
     {
         private PlayerMovementController _movementController;
 
-        public void Start()
+        public override void StartItem()
         {
             _movementController = GetComponentInParent<PlayerMovementController>();
         }

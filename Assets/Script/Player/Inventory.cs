@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 namespace Tangar.io
 {
@@ -34,6 +33,8 @@ namespace Tangar.io
                 
                 if (itemObject.TryGetComponent<Item>(out var item))
                 {
+                    item.StartItem();
+
                     _inventory.Add(item);
 
                     GetItemImage().sprite = item.ItemIcon;
