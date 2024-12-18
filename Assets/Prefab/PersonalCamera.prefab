@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3404974073815270194}
   - component: {fileID: 3144796432014125548}
   - component: {fileID: 4997208068676880585}
-  - component: {fileID: 1577760950065844000}
   m_Layer: 0
   m_Name: PersonalCamera
   m_TagString: MainCamera
@@ -79,14 +78,6 @@ Camera:
   m_StereoSeparation: 0.022
 --- !u!124 &4997208068676880585
 Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667442545517129590}
-  m_Enabled: 1
---- !u!81 &1577760950065844000
-AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

@@ -8,11 +8,20 @@ namespace Tangar.io
     {
         private PlayerMovementController _movementController;
 
-
-        public override void Use()
+        public void Start()
         {
-            GetComponentInParent<PlayerMovementController>().Dash();
+            _movementController = GetComponentInParent<PlayerMovementController>();
+        }
+
+        public override bool Use()
+        {
+            if (!_movementController._isControllable) return false;
+
+            _movementController.Dash();
+
             Runner.Despawn(Object);
+
+            return true;
         }
     }
 }

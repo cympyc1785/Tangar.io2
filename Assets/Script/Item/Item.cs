@@ -13,6 +13,7 @@ namespace Tangar.io
         public string ItemDescription;
         public Sprite ItemIcon;
 
-        public abstract void Use();
+        // Return true if executed successfully
+        public abstract bool Use();
     }
 }

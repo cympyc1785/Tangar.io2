@@ -19,7 +19,7 @@ namespace Tangar.io
                 if (itemObject.TryGetComponent<Item>(out var item))
                 {
                     _inventory.Add(item);
-                    Debug.Log($"{item.ItemName} is added to inventory.");
+                    Debug.Log($"{item.ItemName} is added to inventory. Inventory Count : {_inventory.Count}");
                 }
             }
         }
@@ -29,9 +29,15 @@ namespace Tangar.io
         {
             if (_inventory.Count > 0)
             {
-                _inventory[0].Use();
-                Debug.Log($"{_inventory[0].ItemName} is used.");
-                _inventory.RemoveAt(0);
+                if (_inventory[0].Use())
+                {
+                    Debug.Log($"{_inventory[0].ItemName} is used.");
+                    _inventory.RemoveAt(0);
+                }
+                else
+                {
+                    Debug.Log($"{_inventory[0].ItemName} not used.");
+                }
             }
         }
 

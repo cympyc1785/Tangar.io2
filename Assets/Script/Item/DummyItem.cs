@@ -7,10 +7,12 @@ namespace Tangar.io
 {
     public class DummyItem : Item
     {
-        public override void Use()
+        public override bool Use()
         {
             Debug.Log("Item Invoked!");
             Runner.Despawn(Object);
+
+            return true;
         }
     }
 }
