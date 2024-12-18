@@ -41,8 +41,8 @@ namespace Tangar.io
             // The Game Session SPECIFIC settings are initialized
             if (Object.HasStateAuthority == false) return;
 
-            _screenBoundaryX = Camera.main.orthographicSize * Camera.main.aspect;
-            _screenBoundaryY = Camera.main.orthographicSize;
+            _screenBoundaryX = 245.0f;
+            _screenBoundaryY = 245.0f;
 
             _lastDirection = Vector3.forward;
 
@@ -105,21 +105,15 @@ namespace Tangar.io
         {
             var position = _rigidbody.position;
 
-            if (Mathf.Abs(position.x) < _screenBoundaryX && Mathf.Abs(position.z) < _screenBoundaryY) return;
-
-            if (Mathf.Abs(position.x) > _screenBoundaryX)
+            if (Mathf.Abs(position.x) > _screenBoundaryX || Mathf.Abs(position.z) > _screenBoundaryY)
             {
-                position = new Vector3(-Mathf.Sign(position.x) * _screenBoundaryX, 0, position.z);
-            }
+                // Restrict the x and z positions within the defined boundaries
+                position.x = Mathf.Clamp(position.x, -_screenBoundaryX, _screenBoundaryX);
+                position.z = Mathf.Clamp(position.z, -_screenBoundaryY, _screenBoundaryY);
 
-            if (Mathf.Abs(position.z) > _screenBoundaryY)
-            {
-                position = new Vector3(position.x, 0, -Mathf.Sign(position.z) * _screenBoundaryY);
+                // Apply the adjusted position to the rigidbody
+                _rigidbody.position = position;
             }
-
-            position -= position.normalized *
-                        0.1f; // offset a little bit to avoid looping back & forth between the 2 edges 
-            GetComponent<NetworkRigidbody3D>().Teleport(position);
         }
     }
 }
