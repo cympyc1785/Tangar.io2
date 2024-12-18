@@ -4996,9 +4996,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 3000
   _maxSpeed: 500
-  _dashSpeed: 2000
+  _dashSpeed: 6000
   _dashTime: 0.5
   __lastDirection: {x: 0, y: 0, z: 0}
+  __isControllable:
+    _value: 0
 --- !u!114 &5995520130485653928
 MonoBehaviour:
   m_ObjectHideFlags: 0

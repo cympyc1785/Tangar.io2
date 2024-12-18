@@ -13,7 +13,7 @@ namespace Tangar.io
         // [SerializeField] private float _rotationSpeed = 90.0f;
         [SerializeField] private float _movementSpeed = 3000.0f;
         [SerializeField] private float _maxSpeed = 500.0f;
-        [SerializeField] private float _dashSpeed = 2000.0f;
+        [SerializeField] private float _dashSpeed = 6000.0f;
         [SerializeField] private float _dashTime = 0.5f;
 
         // Local Runtime references
@@ -26,6 +26,9 @@ namespace Tangar.io
         [Networked] private float _screenBoundaryY { get; set; }
 
         [Networked] public Vector3 _lastDirection { get; private set; }
+
+        [Networked] public NetworkBool _isControllable { get; private set; }
+        [Networked] public TickTimer _dashTimer {  get; private set; }
 
         public override void Spawned()
         {
@@ -42,6 +45,8 @@ namespace Tangar.io
             _screenBoundaryY = Camera.main.orthographicSize;
 
             _lastDirection = Vector3.forward;
+
+            _isControllable = true;
         }
 
         public override void FixedUpdateNetwork()
@@ -57,18 +62,25 @@ namespace Tangar.io
                 Move(input);
             }
 
+            if (_dashTimer.Expired(Runner))
+            {
+                _isControllable = true;
+            }
+
             CheckExitScreen();
+        }
+
+        public void Dash()
+        {
+            _isControllable = false;
+            _dashTimer = TickTimer.CreateFromSeconds(Runner, _dashTime);
+            _rigidbody.velocity = _lastDirection * _dashSpeed * Runner.DeltaTime;
         }
 
         // Moves the player RB using the input for the client with InputAuthority over the object
         private void Move(PlayerInput input)
         {
-            //Quaternion rot = _rigidbody.rotation *
-            //                 Quaternion.Euler(0, input.HorizontalInput * _rotationSpeed * Runner.DeltaTime, 0);
-            //_rigidbody.MoveRotation(rot);
-
-            //Vector3 force = (rot * Vector3.forward) * input.VerticalInput * _movementSpeed * Runner.DeltaTime;
-            //_rigidbody.AddForce(force);
+            if (!_isControllable) return;
 
             // Calculate direction
             Vector3 direction = (transform.forward * input.VerticalInput + transform.right * input.HorizontalInput);
