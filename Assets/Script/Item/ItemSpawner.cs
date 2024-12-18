@@ -66,16 +66,18 @@ namespace Tangar.io
 
             int randItemIdx = Random.Range(0, _itemPrefabs.Count);
 
-            var fieldItemId = Runner.Spawn(_fieldItemPrefab, randPos, Quaternion.identity, PlayerRef.None);
+            var fieldItemObject = Runner.Spawn(_fieldItemPrefab, randPos, Quaternion.identity, PlayerRef.None);
 
-            if (fieldItemId.TryGetComponent<FieldItem>(out var fieldItem))
+            fieldItemObject.transform.SetParent(transform);
+
+            if (fieldItemObject.TryGetComponent<FieldItem>(out var fieldItem))
             {
                 // Set random item prefab
                 fieldItem.ItemPrefab = _itemPrefabs[randItemIdx];
             }
 
             // Register for counting
-            _fieldItemIds.Add(fieldItemId);
+            _fieldItemIds.Add(fieldItemObject);
 
             // Sets the delay until the next spawn.
             SetSpawnDelay();

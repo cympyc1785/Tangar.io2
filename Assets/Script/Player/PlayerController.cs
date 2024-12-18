@@ -22,6 +22,7 @@ namespace Tangar.io
         [SerializeField] private GameObject _firingIndicator;
         [SerializeField] private float _indicatorOffset = 7.0f;
 
+        [SerializeField] private GameObject _barrierObject = null;
 
         // Local Runtime references
         private ChangeDetector _changeDetector;
@@ -35,12 +36,11 @@ namespace Tangar.io
 
         private List<LagCompensatedHit> _lagCompensatedHits = new List<LagCompensatedHit>();
 
-        
-
         // Game Session SPECIFIC Settings
         public bool AcceptInput => _isAlive && Object.IsValid;
 
         [Networked] public NetworkBool _isAlive { get; private set; }
+        [Networked] public NetworkBool _isInvincible { get; private set; }
         [Networked] private TickTimer _respawnTimer { get; set; }
         [Networked] private Vector3 _networkScale { get; set; }
 
@@ -61,7 +61,7 @@ namespace Tangar.io
             _hitBoxRoot = GetComponent<HitboxRoot>();
             _hitBox = GetComponent<Hitbox>();
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-            _inventory = GetComponent<Inventory>();
+            _inventory = GetComponentInChildren<Inventory>();
 
             _visualController.SetColorFromPlayerID(Object.InputAuthority.PlayerId);
 
@@ -69,6 +69,8 @@ namespace Tangar.io
             // The Game Session SPECIFIC settings are initialized
             if (Object.HasStateAuthority == false) return;
             _isAlive = true;
+
+            SetInvincible(false);
 
             //UpdateIndicator();
         }
@@ -91,6 +93,9 @@ namespace Tangar.io
                         _hitBoxRoot.BroadRadius = _networkScale.x / 2.0f;
                         _hitBox.SphereRadius = _networkScale.x / 2.0f;
                         //_indicatorOffset = _networkScale.x / 1.6f;
+                        break;
+                    case nameof(_isInvincible):
+                        _barrierObject.SetActive(_isInvincible);
                         break;
                 }
             }
@@ -186,6 +191,13 @@ namespace Tangar.io
             // Ignore my bullet
             if (player == Object.InputAuthority) return;
 
+            // Break barrier
+            if (_isInvincible)
+            {
+                SetInvincible(false);
+                return;
+            }
+
             _isAlive = false;
 
             ResetPlayer();
@@ -201,6 +213,14 @@ namespace Tangar.io
             _respawnTimer = TickTimer.CreateFromSeconds(Runner, _respawnDelay);
         }
 
+        public void SetInvincible(bool invincible)
+        {
+            // For Host Only
+            if (Object.HasStateAuthority == false) return;
+
+            _isInvincible = invincible;
+        }
+
         // Resets the players movement velocity
         private void ResetPlayer()
         {
@@ -214,29 +234,9 @@ namespace Tangar.io
         private void UpdateSize()
         {
             float scale = Mathf.Clamp(_minScale + _playerDataNetworked.Score * _scaleFactor, _minScale, _maxScale);
-            int score = _playerDataNetworked.Score;
-            Debug.Log(score);
+            
             _networkScale = new Vector3(scale, 1, scale);
         }
-        //private void UpdateIndicator()
-        //{
-        //    if (_firingIndicator == null) return;
-
-        //    // Get the current movement direction
-        //    Vector3 movementDirection = _rigidbody.velocity.normalized;
-
-        //    // If the player is moving, update the last valid movement direction
-        //    if (movementDirection != Vector3.zero)
-        //    {
-        //        _lastMovementDirection = movementDirection;
-        //    }
-
-        //    // Adjust the indicator's position based on the last movement direction
-        //    _firingIndicator.transform.position = transform.position + _lastMovementDirection * _indicatorOffset;
-
-        //    // Update the indicator's rotation to point in the last movement direction
-        //    _firingIndicator.transform.rotation = Quaternion.LookRotation(_lastMovementDirection, Vector3.up);
-        //}
-
+        
     }
 }

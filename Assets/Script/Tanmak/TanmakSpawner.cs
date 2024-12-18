@@ -74,6 +74,8 @@ namespace Tangar.io
             var tanmak = Runner.Spawn(_tanmakPrefab, position, Quaternion.identity, PlayerRef.None,
                 onBeforeSpawned: FireTanmak);
 
+            tanmak.transform.SetParent(transform);
+
             _tanmaks.Add(tanmak.Id);
 
             // Sets the delay until the next spawn.

@@ -7,6 +7,7 @@ namespace Tangar.io
 {
     public class Inventory : NetworkBehaviour
     {
+        public PlayerController PlayerController = null;
         public List<Item> _inventory = new List<Item>(2);
 
         public void AddItem(NetworkPrefabRef itemPrefab)
@@ -14,6 +15,7 @@ namespace Tangar.io
             if (itemPrefab != null && _inventory.Count < 2)
             {
                 var itemObject = Runner.Spawn(itemPrefab);
+                itemObject.transform.SetParent(transform);
                 if (itemObject.TryGetComponent<Item>(out var item))
                 {
                     _inventory.Add(item);

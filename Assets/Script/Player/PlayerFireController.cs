@@ -20,6 +20,7 @@ namespace Tangar.io
         private PlayerController _playerController = null;
         private PlayerMovementController _playerMovementController = null;
         private Inventory _inventory = null;
+        private GameObject _spawnerObject = null;
 
         // Game Session SPECIFIC Settings
         [Networked] private NetworkButtons _buttonsPrevious { get; set; }
@@ -32,7 +33,8 @@ namespace Tangar.io
             _rigidbody = GetComponent<Rigidbody>();
             _playerController = GetComponent<PlayerController>();
             _playerMovementController = GetComponent<PlayerMovementController>();
-            _inventory = GetComponent<Inventory>();
+            _inventory = GetComponentInChildren<Inventory>();
+            _spawnerObject = FindObjectOfType<PlayerSpawner>().gameObject;
         }
 
         public override void FixedUpdateNetwork()
@@ -72,6 +74,8 @@ namespace Tangar.io
             var rot = _playerMovementController._lastDirection;
             var bullet = Runner.Spawn(_bullet, _rigidbody.position,
                 Quaternion.FromToRotation(Vector3.forward, rot), Object.InputAuthority);
+
+            bullet.transform.SetParent(_spawnerObject.transform);
 
             // Set initial direction of bullet
             if (bullet != null)
