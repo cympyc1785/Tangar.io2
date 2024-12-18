@@ -48,10 +48,15 @@ namespace Tangar.io
         {
             PlayerInput localInput = new PlayerInput();
 
-            if(floatingJoystick != null)
+            if(floatingJoystick != null && floatingJoystick._pointerDown)
             {
                 localInput.HorizontalInput = floatingJoystick.Horizontal;
                 localInput.VerticalInput = floatingJoystick.Vertical;
+            }
+            else
+            {
+                localInput.HorizontalInput = Input.GetAxis(AXIS_HORIZONTAL);
+                localInput.VerticalInput = Input.GetAxis(AXIS_VERTICAL);
             }
             localInput.Buttons.Set(PlayerButtons.Fire, isFirePressed);
             localInput.Buttons.Set(PlayerButtons.UseItem, isUseItemPressed);
