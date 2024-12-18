@@ -43,16 +43,16 @@ namespace Tangar.io
 
             // --- Host & Client
             // Set the local runtime references.
-            _overviewPanel = FindObjectOfType<PlayerOverviewPanel>();
+            //_overviewPanel = FindObjectOfType<PlayerOverviewPanel>();
             _scorePanel = FindObjectOfType<GameScorePanel>();
 
             // Add an entry to the local Overview panel with the information of this spaceship
-            _overviewPanel.AddEntry(Object.InputAuthority, this);
+            //_overviewPanel.AddEntry(Object.InputAuthority, this);
             _scorePanel.AddEntry(Object.InputAuthority, this);
 
             // Refresh panel visuals in Spawned to set to initial values.
-            _overviewPanel.UpdateNickName(Object.InputAuthority, NickName.ToString());
-            _overviewPanel.UpdateScore(Object.InputAuthority, Score);
+            //_overviewPanel.UpdateNickName(Object.InputAuthority, NickName.ToString());
+            //_overviewPanel.UpdateScore(Object.InputAuthority, Score);
             
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         }
@@ -64,10 +64,10 @@ namespace Tangar.io
                 switch (change)
                 {
                     case nameof(NickName):
-                        _overviewPanel.UpdateNickName(Object.InputAuthority, NickName.ToString());
+                        //_overviewPanel.UpdateNickName(Object.InputAuthority, NickName.ToString());
                         break;
                     case nameof(Score):
-                        _overviewPanel.UpdateScore(Object.InputAuthority, Score);
+                        //_overviewPanel.UpdateScore(Object.InputAuthority, Score);
                         _scorePanel.UpdateRankInfo(Object.InputAuthority, this);
                         break;
                 }
@@ -77,7 +77,7 @@ namespace Tangar.io
         // Remove the entry in the local Overview panel for this spaceship
         public override void Despawned(NetworkRunner runner, bool hasState)
         {
-            _overviewPanel.RemoveEntry(Object.InputAuthority);
+            //_overviewPanel.RemoveEntry(Object.InputAuthority);
             _scorePanel.RemoveEntry(Object.InputAuthority);
         }
 

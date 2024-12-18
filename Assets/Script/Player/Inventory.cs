@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace Tangar.io
 {
@@ -9,6 +11,18 @@ namespace Tangar.io
     {
         public PlayerController PlayerController = null;
         public List<Item> _inventory = new List<Item>(1);
+        public Image _itemImage = null;
+
+
+        private Image GetItemImage()
+        {
+            if (_itemImage == null)
+            {
+                _itemImage = GameObject.Find("Item Image").GetComponent<Image>();
+            }
+            
+            return _itemImage;
+        }
 
         public void AddItem(NetworkPrefabRef itemPrefab)
         {
@@ -16,9 +30,13 @@ namespace Tangar.io
             {
                 var itemObject = Runner.Spawn(itemPrefab);
                 itemObject.transform.SetParent(transform);
+                
                 if (itemObject.TryGetComponent<Item>(out var item))
                 {
                     _inventory.Add(item);
+
+                    GetItemImage().sprite = item.ItemIcon;
+
                     Debug.Log($"{item.ItemName} is added to inventory. Inventory Count : {_inventory.Count}");
                 }
             }
@@ -32,6 +50,7 @@ namespace Tangar.io
                 if (_inventory[0].Use())
                 {
                     Debug.Log($"{_inventory[0].ItemName} is used.");
+                    GetItemImage().sprite = null;
                     _inventory.RemoveAt(0);
                 }
                 else
