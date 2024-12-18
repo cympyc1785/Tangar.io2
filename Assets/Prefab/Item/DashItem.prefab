@@ -66,4 +66,4 @@ MonoBehaviour:
   ItemId: 2
   ItemName: Dash
   ItemDescription: Dash for a short period
-  ItemIcon: {fileID: 0}
+  ItemIcon: {fileID: 21300000, guid: b02ff7b9879527b42a0b8c68c2cf7ce9, type: 3}

@@ -66,4 +66,5 @@ MonoBehaviour:
   ItemId: 1
   ItemName: Barrier
   ItemDescription: Blocks bullet for once
-  ItemIcon: {fileID: 0}
+  ItemIcon: {fileID: 21300000, guid: c5ecf609b0db1104ab59e76d178fdf2d, type: 3}
+  _barrierTime: 3

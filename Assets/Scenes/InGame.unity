@@ -409,6 +409,9 @@ MonoBehaviour:
   _itemPrefabs:
   - RawGuidValue: 2c82ec10d67327f4cbfc923944c3f359
   - RawGuidValue: e877d65a57188d2438baff764827d3b5
+  _itemSprites:
+  - {fileID: 21300000, guid: c5ecf609b0db1104ab59e76d178fdf2d, type: 3}
+  - {fileID: 21300000, guid: b02ff7b9879527b42a0b8c68c2cf7ce9, type: 3}
   _minSpawnDelay: 1
   _maxSpawnDelay: 2
   _maxSpawnCount: 10

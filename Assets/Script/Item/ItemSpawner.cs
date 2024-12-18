@@ -12,6 +12,7 @@ namespace Tangar.io
     {
         [SerializeField] private NetworkPrefabRef _fieldItemPrefab = NetworkPrefabRef.Empty;
         [SerializeField] private List<NetworkPrefabRef> _itemPrefabs = new List<NetworkPrefabRef>();
+        [SerializeField] private List<Sprite> _itemSprites = new List<Sprite>();
 
         [SerializeField] private float _minSpawnDelay = 1.0f;
         [SerializeField] private float _maxSpawnDelay = 2.0f;
@@ -66,9 +67,11 @@ namespace Tangar.io
 
             int randItemIdx = Random.Range(0, _itemPrefabs.Count);
 
-            var fieldItemObject = Runner.Spawn(_fieldItemPrefab, randPos, Quaternion.identity, PlayerRef.None);
+            var fieldItemObject = Runner.Spawn(_fieldItemPrefab, randPos);
 
             fieldItemObject.transform.SetParent(transform);
+
+            fieldItemObject.GetComponent<SpriteRenderer>().sprite = _itemSprites[randItemIdx];
 
             if (fieldItemObject.TryGetComponent<FieldItem>(out var fieldItem))
             {

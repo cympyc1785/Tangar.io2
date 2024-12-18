@@ -8,11 +8,11 @@ namespace Tangar.io
     public class Inventory : NetworkBehaviour
     {
         public PlayerController PlayerController = null;
-        public List<Item> _inventory = new List<Item>(2);
+        public List<Item> _inventory = new List<Item>(1);
 
         public void AddItem(NetworkPrefabRef itemPrefab)
         {
-            if (itemPrefab != null && _inventory.Count < 2)
+            if (itemPrefab != null && _inventory.Count < 1)
             {
                 var itemObject = Runner.Spawn(itemPrefab);
                 itemObject.transform.SetParent(transform);
