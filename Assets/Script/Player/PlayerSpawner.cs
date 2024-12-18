@@ -7,6 +7,7 @@ namespace Tangar.io
     // Therefore none of its parameters need to be [Networked].
     public class PlayerSpawner : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
+        public Camera Camera;
         // References to the NetworkObject prefab to be used for the players' players.
         [SerializeField] private NetworkPrefabRef _playerNetworkPrefab = NetworkPrefabRef.Empty;
 
