@@ -12,7 +12,7 @@ namespace Tangar.io
         private GameObject _cameraInstance;
         public string modelChildName = "Model";
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             if (!IsLocalPlayer())
             {
