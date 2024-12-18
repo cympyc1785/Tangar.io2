@@ -5000,8 +5000,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 3000
   _maxSpeed: 500
-  _dashSpeed: 6000
-  _dashTime: 0.5
+  _dashSpeed: 15000
+  _dashTime: 0.2
   __lastDirection: {x: 0, y: 0, z: 0}
   __isControllable:
     _value: 0
@@ -5094,6 +5094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 4161315759114475690}
   _inventory: []
+  _itemImage: {fileID: 0}
 --- !u!114 &4542320218131330524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10141,6 +10142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 4161315759114475690}
   _inventory: []
+  _itemImage: {fileID: 0}
 --- !u!1 &5631020575753157889
 GameObject:
   m_ObjectHideFlags: 0
