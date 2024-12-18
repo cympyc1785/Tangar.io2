@@ -25,10 +25,13 @@ namespace Tangar.io
 
         public void AddItem(NetworkPrefabRef itemPrefab)
         {
+            if (!Object.HasStateAuthority) return;
+
             if (itemPrefab != null && _inventory.Count < 1)
             {
                 var itemObject = Runner.Spawn(itemPrefab);
                 Transform inventoryTransform = transform.Find(inventoryChildName);
+                Debug.Log(inventoryTransform.gameObject);
                 itemObject.transform.SetParent(inventoryTransform);
                 
                 if (itemObject.TryGetComponent<Item>(out var item))
