@@ -20,8 +20,8 @@ namespace Tangar.io
 
         private TickTimer _spawnDelay;
 
-        private float _screenBoundaryX = 0.0f;
-        private float _screenBoundaryY = 0.0f;
+        private float _screenBoundaryX = 250.0f;
+        private float _screenBoundaryY = 250.0f;
 
         private List<NetworkId> _fieldItemIds = new List<NetworkId>();
 
@@ -33,9 +33,6 @@ namespace Tangar.io
             // Triggers the delay until the first spawn.
             SetSpawnDelay();
 
-            // The spawn boundaries are based of the camera settings
-            _screenBoundaryX = Camera.main.orthographicSize * Camera.main.aspect;
-            _screenBoundaryY = Camera.main.orthographicSize;
         }
 
         public override void FixedUpdateNetwork()
