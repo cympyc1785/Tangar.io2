@@ -62,9 +62,12 @@ namespace Tangar.io
                 if (_inventory[0].Use())
                 {
                     Debug.Log($"{_inventory[0].ItemName} is used.");
-                    GetItemImage().sprite = null;
+                    
                     _inventory.RemoveAt(0);
                     _itemObject = null;
+
+                    if (!GetComponent<NetworkObject>().HasInputAuthority) return;
+                    GetItemImage().sprite = null;
                 }
                 else
                 {
