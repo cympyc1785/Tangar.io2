@@ -12,7 +12,7 @@ namespace Tangar.io
         public PlayerController PlayerController = null;
         public List<Item> _inventory = new List<Item>(1);
         public Image _itemImage = null;
-
+        public string inventoryChildName = "Inventory";
 
         private Image GetItemImage()
         {
@@ -29,7 +29,8 @@ namespace Tangar.io
             if (itemPrefab != null && _inventory.Count < 1)
             {
                 var itemObject = Runner.Spawn(itemPrefab);
-                itemObject.transform.SetParent(transform);
+                Transform inventoryTransform = transform.Find(inventoryChildName);
+                itemObject.transform.SetParent(inventoryTransform);
                 
                 if (itemObject.TryGetComponent<Item>(out var item))
                 {
