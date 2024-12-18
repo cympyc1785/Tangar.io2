@@ -13,6 +13,8 @@ namespace Tangar.io
         // [SerializeField] private float _rotationSpeed = 90.0f;
         [SerializeField] private float _movementSpeed = 3000.0f;
         [SerializeField] private float _maxSpeed = 500.0f;
+        [SerializeField] private float _dashSpeed = 2000.0f;
+        [SerializeField] private float _dashTime = 0.5f;
 
         // Local Runtime references
         private Rigidbody

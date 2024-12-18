@@ -10,6 +10,7 @@ namespace Tangar.io
     public class PlayerVisualController : MonoBehaviour
     {
         [SerializeField] private MeshRenderer _playerModel = null;
+        [SerializeField] private SpriteRenderer _indicator = null;
         [SerializeField] private ParticleSystem _destructionVFX = null;
         [SerializeField] private ParticleSystem _engineTrailVFX = null;
 
@@ -25,6 +26,7 @@ namespace Tangar.io
         public void TriggerSpawn()
         {
             _playerModel.enabled = true;
+            _indicator.enabled = true;
             _engineTrailVFX.Play();
             _destructionVFX.Stop(); 
         }
@@ -32,6 +34,7 @@ namespace Tangar.io
         public void TriggerDestruction()
         {
             _playerModel.enabled = false;
+            _indicator.enabled = false;
             _engineTrailVFX.Stop();
             _destructionVFX.Play();
         }

@@ -8,23 +8,24 @@ namespace Tangar.io
         private Rigidbody _playerRigidbody;
 
         [SerializeField] private float rotationSmoothing = 100f;
-        [SerializeField] private float movementThreshold = 0.1f; 
+        [SerializeField] private float movementThreshold = 0.1f;
+        [SerializeField] private PlayerMovementController _playerMovementController;
 
-        private Vector3 _lastDirection = Vector3.forward; 
+        private Vector3 _lastDirection { get; set; }
+
+        public override void Spawned()
+        {
+            _playerRigidbody = GetComponentInParent<Rigidbody>();
+            if (_playerRigidbody == null)
+            {
+                Debug.LogWarning("Player Rigidbody not found!");
+                return;
+            }
+        }
 
         public override void FixedUpdateNetwork()
         {
-            if (_playerRigidbody == null)
-            {
-                _playerRigidbody = GetComponentInParent<Rigidbody>();
-                if (_playerRigidbody == null)
-                {
-                    Debug.LogWarning("Player Rigidbody not found!");
-                    return;
-                }
-            }
-
-            Vector3 velocity = _playerRigidbody.velocity;
+            Vector3 velocity = _playerMovementController._lastDirection;
             Vector3 movementDirection = new Vector3(velocity.x, 0, velocity.z);
 
 
