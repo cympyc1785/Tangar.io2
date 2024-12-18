@@ -4910,7 +4910,8 @@ MonoBehaviour:
   SortKey: 3583807864
   ObjectInterest: 0
   Flags: 264449
-  NestedObjects: []
+  NestedObjects:
+  - {fileID: 1951985996956367264}
   NetworkedBehaviours:
   - {fileID: 3318268825766571343}
   - {fileID: 4161315759114475690}
@@ -4918,7 +4919,6 @@ MonoBehaviour:
   - {fileID: 5995520130485653928}
   - {fileID: 3413019040037438842}
   - {fileID: 5788736074415650863}
-  - {fileID: 2238711301383716008}
   - {fileID: 6320284965286083449}
 --- !u!114 &3318268825766571343
 MonoBehaviour:
@@ -4960,7 +4960,6 @@ MonoBehaviour:
     m_Bits: 512
   _model: {fileID: 5631020575753157889}
   _firingIndicator: {fileID: 0}
-  _indicatorOffset: 6
   _barrierObject: {fileID: 7232607523554526523}
   __isAlive:
     _value: 0
@@ -9903,6 +9902,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6179847205550270639}
   - component: {fileID: 2238711301383716008}
+  - component: {fileID: 1951985996956367264}
+  - component: {fileID: 227831439916015499}
   m_Layer: 7
   m_Name: IndicatorPivot
   m_TagString: Untagged
@@ -9941,6 +9942,41 @@ MonoBehaviour:
   rotationSmoothing: 100
   movementThreshold: 0.1
   _playerMovementController: {fileID: 8813624284770857263}
+--- !u!114 &1951985996956367264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141590739015005953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 841112960
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 2238711301383716008}
+  - {fileID: 227831439916015499}
+--- !u!114 &227831439916015499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141590739015005953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &756640241368420239
 GameObject:
   m_ObjectHideFlags: 0

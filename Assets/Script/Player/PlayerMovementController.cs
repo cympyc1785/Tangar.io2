@@ -17,9 +17,7 @@ namespace Tangar.io
         [SerializeField] private float _dashTime = 0.5f;
 
         // Local Runtime references
-        private Rigidbody
-            _rigidbody =
-                null; // The Unity Rigidbody (RB) is automatically synchronised across the network thanks to the NetworkRigidbody (NRB) component.
+        private Rigidbody _rigidbody = null;
 
         private PlayerController _playerController = null;
 

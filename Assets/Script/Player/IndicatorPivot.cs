@@ -5,23 +5,11 @@ namespace Tangar.io
 {
     public class IndicatorPivot : NetworkBehaviour
     {
-        private Rigidbody _playerRigidbody;
-
         [SerializeField] private float rotationSmoothing = 100f;
         [SerializeField] private float movementThreshold = 0.1f;
         [SerializeField] private PlayerMovementController _playerMovementController;
 
         private Vector3 _lastDirection { get; set; }
-
-        public override void Spawned()
-        {
-            _playerRigidbody = GetComponentInParent<Rigidbody>();
-            if (_playerRigidbody == null)
-            {
-                Debug.LogWarning("Player Rigidbody not found!");
-                return;
-            }
-        }
 
         public override void FixedUpdateNetwork()
         {

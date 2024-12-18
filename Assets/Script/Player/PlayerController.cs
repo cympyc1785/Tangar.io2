@@ -20,7 +20,6 @@ namespace Tangar.io
         [SerializeField] private LayerMask _itemCollisionLayer;
         [SerializeField] private GameObject _model;
         [SerializeField] private GameObject _firingIndicator;
-        [SerializeField] private float _indicatorOffset = 7.0f;
 
         [SerializeField] private GameObject _barrierObject = null;
 
@@ -71,8 +70,6 @@ namespace Tangar.io
             _isAlive = true;
 
             SetInvincible(false);
-
-            //UpdateIndicator();
         }
 
         public override void Render()
@@ -92,7 +89,6 @@ namespace Tangar.io
                         _playerDamageRadius = _networkScale.x / 2.0f;
                         _hitBoxRoot.BroadRadius = _networkScale.x / 2.0f;
                         _hitBox.SphereRadius = _networkScale.x / 2.0f;
-                        //_indicatorOffset = _networkScale.x / 1.6f;
                         break;
                     case nameof(_isInvincible):
                         _barrierObject.SetActive(_isInvincible);
@@ -136,7 +132,6 @@ namespace Tangar.io
             {
                 // item get effect?
             }
-            //UpdateIndicator();
         }
 
         // Check tanmak collision using a lag compensated OverlapSphere
