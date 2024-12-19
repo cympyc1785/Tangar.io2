@@ -62,7 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5350a253bef6447b24f04f12bf43c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableJoystick: {fileID: 0}
+  floatingJoystick: {fileID: 0}
+  fireButton: {fileID: 0}
+  useItemButton: {fileID: 0}
 --- !u!114 &-6131310154494022406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4853cec620272cf48bcb0c5ab0c62cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuSceneName: AsteroidsSimple-Menu
+  _menuSceneName: StartMenu
 --- !u!114 &7250302595733111322
 MonoBehaviour:
   m_ObjectHideFlags: 0

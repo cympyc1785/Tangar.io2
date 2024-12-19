@@ -72,6 +72,7 @@ namespace Tangar.io
                     // Ends the game if the game session length has been exceeded
                     if (_timer.ExpiredOrNotRunning(Runner))
                     {
+                        CheckIfGameHasEnded();
                         GameHasEnded();
                     }
 
